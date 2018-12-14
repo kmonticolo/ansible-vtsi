@@ -3,4 +3,5 @@
   become: yes
   gather_facts: false
   roles:
-  - ansible-role-vtsi
+  - { role: ansible-role-vtsi, tags: vtsi }
+
