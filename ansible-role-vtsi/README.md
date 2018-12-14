@@ -11,7 +11,10 @@ Requirements
 
 Role Variables
 --------------
+Role variables are to be set in `ansible-vtsi/ansible-role-vtsi/vars/main.yml`
+
 mirror: set a mirror that contains vTSI package
+
 build: informs which package build should be used
 
 host_entries: set an IP with hostnames that will be located in /etc/hosts file, make sure that you are using the correct ones.
@@ -45,17 +48,32 @@ Example Playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
+```
     - hosts: vtsi
       become: yes
       gather_facts: false
       roles:
          - ansible-role-vtsi
-
+```
+Running
+-------
+```
+$ ansible-playbook -i inventory vtsi.yml
+```
 Testing
 -------
 
-status can be tested by run: curl localhost:8080/actuator/health
+Verify if vTSI is running by issuing the following command:
+```
+curl localhost:8080/actuator/health
+```
+The expected response is {"status":"UP"}.
+
+Then, issue the following command:
+```
+telnet localhost 8021
+```
+The expected response is 220 Service ready for new user.
 
 License
 -------
