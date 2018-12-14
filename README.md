@@ -19,15 +19,25 @@ host_entries: set an IP with hostnames that will be located in /etc/hosts file, 
 vtsi_host: vTSI hostname
 
 snmp_address: IP address for SNMP
+
 mdb_host: name/IP of MDB
+
 mdb_username: MDB database username (default: sa)
+
 mdb_password: MDB database password
+
 sdb_username: SDB database username (same as for MDB, when no separate SDB exists)
+
 sdb_password: SDB database password
+
 mvl_login: MVL username
+
 mvl_password: MVL password
+
 alarm_login: Alarm username
+
 alarm_password: Alarm password
+
 alarm_host: Alarm hostname (default is to be MDB host)
 
 
