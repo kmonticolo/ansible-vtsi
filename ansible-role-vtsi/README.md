@@ -13,36 +13,23 @@ Role Variables
 --------------
 Role variables are to be set in `ansible-vtsi/ansible-role-vtsi/vars/main.yml`
 
-mirror: set a mirror that contains vTSI package
-
-build: informs which package build should be used
-
-host_entries: set an IP with hostnames that will be located in /etc/hosts file, make sure that you are using the correct ones.
-
-vtsi_host: vTSI hostname
-
-snmp_address: IP address for SNMP
-
-mdb_host: name/IP of MDB
-
-mdb_username: MDB database username (default: sa)
-
-mdb_password: MDB database password
-
-sdb_username: SDB database username (same as for MDB, when no separate SDB exists)
-
-sdb_password: SDB database password
-
-mvl_login: MVL username
-
-mvl_password: MVL password
-
-alarm_login: Alarm username
-
-alarm_password: Alarm password
-
-alarm_host: Alarm hostname (default is to be MDB host)
-
+| Name              | Default Value       | Description          |
+|-------------------|---------------------|----------------------|
+| `mirror` | `http://172.31.67.7/artifacts/vtsi/master/latest/vtsi-kit.tar.gz` | Source of vTSI package. |
+| `build` | `latest` | Informs which package build should be used. |
+| `host_entries` | `[undefined]` | Set an IP with hostnames that will be located in /etc/hosts file. |
+| `vtsi_host` | `VTSI` | vTSI hostname. |
+| `snmp_address` | `[undefined]` | IP address for SNMP. |
+| `mdb_host` | `SPOTDB2016` | hostname or IP addres of Master database. |
+| `mdb_username` | `sa` | Master database username. |
+| `mdb_password` | `Cdci2010` | Master database password. |
+| `sdb_username` | `sa` | Slave database username. |
+| `sdb_password` | `Cdci2010` | Slave database password. |
+| `mvl_login` | `administrator` | Video Library username. |
+| `mvl_password` | `Cdci2018` | Video Library password. |
+| `alarm_login` | `administrator` | Alarm username. |
+| `alarm_password` | `Cdci2018` | Lines in `postgres.conf` that are set in order to enable streaming replication. |
+| `alarm_host` | `SPOTDB2016` | Lines in `postgres.conf` that are set in order to enable streaming replication. |
 
 Example Playbook
 ----------------
