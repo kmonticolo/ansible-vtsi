@@ -1,0 +1,19 @@
+---
+# vars file for ansible-role-vtsi
+host_entries: |
+            192.168.80.52 cim
+            192.168.80.53 pump
+            192.168.80.50 SPOTDB2016
+
+vtsi_host: VTSI
+snmp_address: ""
+mdb_host: 192.168.80.50
+mdb_username: sa
+mdb_password: Cdci2010
+sdb_username: sa
+sdb_password: Cdci2010
+mvl_login: administrator
+mvl_password: Cdci2018
+alarm_login: administrator
+alarm_password: Cdci2018
+alarm_host: 192.168.80.50

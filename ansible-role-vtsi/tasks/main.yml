@@ -1,0 +1,71 @@
+---
+# tasks file for ansible-role-vtsi
+# TODO The hostname cim should resolve to the CIM IP.
+# TODO The hostname pump should resolve to the PUMP IP.
+# TODO The hostnames for SDB, FSDB, MVL should resolve to the right IPs.
+
+- name: Generate /etc/hosts file
+  template:
+    src=etc/hosts.j2
+    dest=/etc/hosts
+
+- name: ensure group seachange exists
+  group:
+    name: seachange
+    state: present
+
+- name: ensure user seachange exists
+  user:
+    name: seachange
+    shell: /bin/bash
+    groups: seachange,wheel
+
+- name: Unarchive latest vtsi
+  unarchive:
+    src: http://172.31.67.7/artifacts/vtsi/master/latest/vtsi-kit.tar.gz
+    dest: /tmp
+    remote_src: yes
+    creates: /tmp/vtsi-kit/
+
+- name: check if vtsi PID file exists
+  stat:
+    path: /seachange/local/vtsi/bin/./vTSI.pid
+  register: vtsi_pid
+  changed_when: no
+  failed_when: no
+  become: no
+  check_mode: no
+
+- name: run migrate.sh
+  command: /bin/sh migration/migrate.sh
+  args:
+    chdir: /tmp/vtsi-kit
+  when: vtsi_pid.stat.exists == 0
+
+- name: find rpm files to install
+  find:
+    paths: /tmp/vtsi-kit/rpms/
+    patterns: '*.rpm'
+  register: rpms
+
+- name: install rpms
+  yum:
+    name: "{{ rpms.files |  map(attribute='path') | list }}"
+
+- name: send configuration to application-vtsi.properties
+  template:
+    src: application-vtsi.properties
+    dest: /seachange/local/vtsi/config/
+    backup: yes
+
+- name: copy log4j file
+  copy:
+    src: /seachange/local/vtsi/config/log4j2-sample.xml
+    dest: /seachange/local/vtsi/config/log4j2.xml
+    remote_src: yes
+
+- name: Start service vtsi
+  service:
+    name: vtsi
+    state: started
+    enabled: yes
