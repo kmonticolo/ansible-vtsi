@@ -1,7 +1,7 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+ansible-role-vtsi role installs and configures vTSI application on Centos 7 server.
 
 Requirements
 ------------
