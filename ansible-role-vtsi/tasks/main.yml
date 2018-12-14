@@ -1,8 +1,5 @@
 ---
 # tasks file for ansible-role-vtsi
-# TODO The hostname cim should resolve to the CIM IP.
-# TODO The hostname pump should resolve to the PUMP IP.
-# TODO The hostnames for SDB, FSDB, MVL should resolve to the right IPs.
 
 - name: Generate /etc/hosts file
   template:
@@ -57,12 +54,16 @@
     src: application-vtsi.properties
     dest: /seachange/local/vtsi/config/
     backup: yes
+  notify:
+    - restart vtsi
 
 - name: copy log4j file
   copy:
     src: /seachange/local/vtsi/config/log4j2-sample.xml
     dest: /seachange/local/vtsi/config/log4j2.xml
     remote_src: yes
+  notify:
+    - restart vtsi
 
 - name: Start service vtsi
   service:
