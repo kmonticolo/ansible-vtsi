@@ -28,8 +28,8 @@ Role variables are to be set in `ansible-vtsi/ansible-role-vtsi/vars/main.yml`
 | `mvl_login` | `administrator` | Video Library username. |
 | `mvl_password` | `Cdci2018` | Video Library password. |
 | `alarm_login` | `administrator` | Alarm username. |
-| `alarm_password` | `Cdci2018` | Lines in `postgres.conf` that are set in order to enable streaming replication. |
-| `alarm_host` | `SPOTDB2016` | Lines in `postgres.conf` that are set in order to enable streaming replication. |
+| `alarm_password` | `Cdci2018` | Password for Alarm user.  |
+| `alarm_host` | `SPOTDB2016` | Hostname or IP address for Alarm host. |
 
 Example Playbook
 ----------------
