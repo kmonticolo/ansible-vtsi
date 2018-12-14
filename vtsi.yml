@@ -2,7 +2,5 @@
 - hosts: vtsi
   become: yes
   gather_facts: false
-  #vars_files:
-  #  - /vars/hosts.yml
   roles:
   - ansible-role-vtsi
