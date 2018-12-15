@@ -17,7 +17,7 @@
   user:
     name: "{{ vtsi_user }}"
     shell: /bin/bash
-    groups: "{{ vtsi_user }}",wheel
+    groups: "{{ vtsi_user }},wheel"
 
 - name: Unarchive latest vtsi
   unarchive:
