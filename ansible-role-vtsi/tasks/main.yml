@@ -28,7 +28,7 @@
 
 - name: check if vtsi PID file exists
   stat:
-    path: /seachange/local/vtsi/bin/./vTSI.pid
+    path: "{{ vtsi_directory }}/bin/./vTSI.pid"
   register: vtsi_pid
   changed_when: no
   failed_when: no
@@ -54,15 +54,15 @@
 - name: create application-vtsi.properties configuration
   template:
     src: application-vtsi.properties
-    dest: /seachange/local/vtsi/config/
+    dest: "{{ vtsi_directory }}/config/"
     backup: yes
   notify:
     - restart vtsi
 
 - name: copy log4j file
   copy:
-    src: /seachange/local/vtsi/config/log4j2-sample.xml
-    dest: /seachange/local/vtsi/config/log4j2.xml
+    src: "{{ vtsi_directory }}/config/log4j2-sample.xml"
+    dest: "{{ vtsi_directory }}/config/log4j2.xml"
     remote_src: yes
   notify:
     - restart vtsi
