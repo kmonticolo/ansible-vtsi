@@ -39,7 +39,7 @@
   command: /bin/sh migration/migrate.sh
   args:
     chdir: "{{ tmp_dir }}/vtsi-kit"
-  when: vtsi_pid.stat.exists == 0
+  when: not vtsi_pid.stat.exists
 
 - name: find rpm files to install
   find:
