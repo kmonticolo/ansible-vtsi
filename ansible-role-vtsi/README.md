@@ -17,6 +17,8 @@ Role variables are to be set in `ansible-vtsi/ansible-role-vtsi/vars/main.yml`
 |-------------------|---------------------|----------------------|
 | `mirror` | `http://172.31.67.7/artifacts/vtsi/master/latest/vtsi-kit.tar.gz` | Source of vTSI package. |
 | `build` | `latest` | Informs which package build should be used. |
+| `vtsi_user` | `seachange` | Informs which user is running an instance. |
+| `tmp_dir` | `/tmp` | Temporary directory for unpacking package. |
 | `host_entries` | `[undefined]` | Set an IP with hostnames that will be located in /etc/hosts file. |
 | `vtsi_host` | `VTSI` | vTSI hostname. |
 | `snmp_address` | `[undefined]` | IP address for SNMP. |
