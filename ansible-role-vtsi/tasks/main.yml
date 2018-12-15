@@ -67,6 +67,9 @@
   notify:
     - restart vtsi
 
+- name: flush handlers
+  meta: flush_handlers
+
 - name: Start service vtsi
   service:
     name: vtsi
@@ -74,5 +77,7 @@
     enabled: yes
 
 - name: Make sure vTSI is reponding on configured port
-  wait_for: port=8080 delay=3 timeout=300
-  
+  wait_for: port={{ item }} delay=3 timeout=300
+  with_items:
+    - 8080
+    - 8021
