@@ -6,11 +6,13 @@ mirror: http://172.31.67.7/artifacts/vtsi/master/{{ build }}/vtsi-kit.tar.gz
 # which build to use
 build: latest
 
+# /etc/hosts entries
 host_entries: |
             192.168.80.52 cim
             192.168.80.53 pump
             192.168.80.50 SPOTDB2016
 
+# entries in vtsi properties configuration file
 vtsi_host: VTSI
 snmp_address: ""
 mdb_host: SPOTDB2016
