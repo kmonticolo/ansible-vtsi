@@ -16,11 +16,17 @@ tmp_dir: /tmp
 cim_hostname: cim
 pump_hostname: pump
 mdb_hostname: SPOTDB2016
+
+# IP of hosts
+cim_ip: 192.168.80.52
+pump_ip: 192.168.80.53
+mdb_ip: 192.168.80.50
+
 # /etc/hosts entries
 host_entries: |
-            192.168.80.52 {{ cim_hostname }}
-            192.168.80.53 {{ pump_hostname }}
-            192.168.80.50 {{ mdb_hostname }}
+            {{ cim_ip }} {{ cim_hostname }}
+            {{ pump_ip }} {{ pump_hostname }}
+            {{ mdb_ip }} {{ mdb_hostname }}
 
 # entries in vtsi properties configuration file
 vtsi_host: VTSI
