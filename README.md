@@ -1,5 +1,3 @@
-[![Build Status](https://wspoma.ga/jenkins/job/ansible vtsi install/badge/icon)](https://wspoma.ga/jenkins/job/ansible vtsi install)
-
 Role Name
 =========
 
