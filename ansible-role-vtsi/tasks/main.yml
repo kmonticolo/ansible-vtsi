@@ -44,12 +44,8 @@
 - name: Find rpm files to install
   find:
     paths: "{{ tmp_dir }}/vtsi-kit/rpms/"
-    patterns: "{{ item }}"
+    patterns: '*.rpm'
   register: rpms
-  with_items:
-    - jdk*.rpm
-    - seachange*.rpm
-    - vtsi*.rpm
 
 - name: Install rpms
   yum:
