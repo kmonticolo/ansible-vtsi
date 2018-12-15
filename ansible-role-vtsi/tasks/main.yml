@@ -72,3 +72,7 @@
     name: vtsi
     state: started
     enabled: yes
+
+- name: Make sure vTSI is reponding on configured port
+  wait_for: port=8080 delay=3 timeout=300
+  
