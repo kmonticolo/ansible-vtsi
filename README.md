@@ -13,6 +13,8 @@ Role Variables
 --------------
 Role variables are to be set in `ansible-vtsi/ansible-role-vtsi/vars/main.yml`
 
+You may need to change mdb and mvl entries only, the rest should work as configured.
+
 | Name              | Default Value       | Description          |
 |-------------------|---------------------|----------------------|
 | `mirror` | `http://172.31.67.7/artifacts/vtsi/master/latest/vtsi-kit.tar.gz` | Source of vTSI package. |
