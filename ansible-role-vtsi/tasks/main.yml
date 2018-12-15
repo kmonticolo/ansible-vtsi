@@ -44,7 +44,15 @@
 - name: Find rpm files to install
   find:
     paths: "{{ tmp_dir }}/vtsi-kit/rpms/"
+<<<<<<< HEAD
     patterns: '*.rpm'
+=======
+    patterns: "{{ item }}"
+  with_items:
+    - jdk*.rpm
+    - seachange*.rpm
+    - vtsi*.rpm
+>>>>>>> move register rpms to the end of task
   register: rpms
 
 - name: Install rpms
