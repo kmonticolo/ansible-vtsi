@@ -51,7 +51,7 @@
   yum:
     name: "{{ rpms.files |  map(attribute='path') | list }}"
 
-- name: send configuration to application-vtsi.properties
+- name: create application-vtsi.properties configuration
   template:
     src: application-vtsi.properties
     dest: /seachange/local/vtsi/config/
