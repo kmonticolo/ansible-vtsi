@@ -12,10 +12,13 @@ vtsi_user: seachange
 # temporary directory
 tmp_dir: /tmp
 
+# name of hostnames
+cim_hostname: cim
+pump_hostname: pump
 # /etc/hosts entries
 host_entries: |
-            192.168.80.52 cim
-            192.168.80.53 pump
+            192.168.80.52 "{{ cim_hostname }}"
+            192.168.80.53 "{{ pump_hostname }}"
             192.168.80.50 SPOTDB2016
 
 # entries in vtsi properties configuration file
