@@ -51,7 +51,7 @@
   yum:
     name: "{{ rpms.files |  map(attribute='path') | list }}"
 
-- name: create application-vtsi.properties configuration
+- name: apply application-vtsi.properties configuration
   template:
     src: application-vtsi.properties
     dest: "{{ vtsi_directory }}/config/"
