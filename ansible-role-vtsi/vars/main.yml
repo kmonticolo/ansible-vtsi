@@ -16,10 +16,10 @@ snmp_address: ""
 mdb_host: SPOTDB2016
 mdb_username: sa
 mdb_password: Cdci2010
-sdb_username: sa
-sdb_password: Cdci2010
+sdb_username: "{{ mdb_username }}"
+sdb_password: "{{ mdb_password }}"
 mvl_login: administrator
 mvl_password: Cdci2018
 alarm_login: administrator
 alarm_password: Cdci2018
-alarm_host: SPOTDB2016
+alarm_host: "{{ mdb_host }}"
