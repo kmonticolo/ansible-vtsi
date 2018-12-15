@@ -15,16 +15,16 @@ tmp_dir: /tmp
 # name of hostnames
 cim_hostname: cim
 pump_hostname: pump
+mdb_hostname: SPOTDB2016
 # /etc/hosts entries
 host_entries: |
             192.168.80.52 {{ cim_hostname }}
             192.168.80.53 {{ pump_hostname }}
-            192.168.80.50 SPOTDB2016
+            192.168.80.50 {{ mdb_hostname }}
 
 # entries in vtsi properties configuration file
 vtsi_host: VTSI
 snmp_address: ""
-mdb_host: SPOTDB2016
 mdb_username: sa
 mdb_password: Cdci2010
 sdb_username: "{{ mdb_username }}"
@@ -33,4 +33,4 @@ mvl_login: administrator
 mvl_password: Cdci2018
 alarm_login: "{{ mvl_login }}"
 alarm_password: "{{ mvl_password }}"
-alarm_host: "{{ mdb_host }}"
+alarm_host: "{{ mdb_hostname }}"
