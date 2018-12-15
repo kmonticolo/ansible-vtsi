@@ -19,7 +19,7 @@
     shell: /bin/bash
     groups: "{{ vtsi_user }},wheel"
 
-- name: Unarchive latest vtsi
+- name: Unarchive {{ build }} vtsi
   unarchive:
     src: "{{ mirror }}"
     dest: "{{ tmp_dir }}"
