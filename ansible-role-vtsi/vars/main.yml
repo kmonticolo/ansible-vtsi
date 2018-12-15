@@ -9,6 +9,9 @@ build: latest
 # on which user vTSI service should run
 vtsi_user: seachange
 
+# temporary directory
+tmp_dir: /tmp
+
 # /etc/hosts entries
 host_entries: |
             192.168.80.52 cim

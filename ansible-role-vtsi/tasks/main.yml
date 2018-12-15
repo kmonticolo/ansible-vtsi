@@ -22,9 +22,9 @@
 - name: Unarchive latest vtsi
   unarchive:
     src: "{{ mirror }}"
-    dest: /tmp
+    dest: "{{ tmp_dir }}"
     remote_src: yes
-    creates: /tmp/vtsi-kit/
+    creates: "{{ tmp_dir }}/vtsi-kit/"
 
 - name: check if vtsi PID file exists
   stat:
@@ -38,12 +38,12 @@
 - name: run migrate.sh
   command: /bin/sh migration/migrate.sh
   args:
-    chdir: /tmp/vtsi-kit
+    chdir: "{{ tmp_dir }}/vtsi-kit"
   when: vtsi_pid.stat.exists == 0
 
 - name: find rpm files to install
   find:
-    paths: /tmp/vtsi-kit/rpms/
+    paths: "{{ tmp_dir }}/vtsi-kit/rpms/"
     patterns: '*.rpm'
   register: rpms
 
