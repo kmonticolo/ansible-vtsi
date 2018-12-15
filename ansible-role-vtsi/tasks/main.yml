@@ -8,16 +8,16 @@
   notify:
     - restart vtsi
 
-- name: ensure group seachange exists
+- name: ensure group "{{ vtsi_user }}" exists
   group:
-    name: seachange
+    name: "{{ vtsi_user }}"
     state: present
 
-- name: ensure user seachange exists
+- name: ensure user "{{ vtsi_user }}" exists
   user:
-    name: seachange
+    name: "{{ vtsi_user }}"
     shell: /bin/bash
-    groups: seachange,wheel
+    groups: "{{ vtsi_user }}",wheel
 
 - name: Unarchive latest vtsi
   unarchive:

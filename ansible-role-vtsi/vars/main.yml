@@ -6,6 +6,9 @@ mirror: http://172.31.67.7/artifacts/vtsi/master/{{ build }}/vtsi-kit.tar.gz
 # which build to use
 build: latest
 
+# on which user vTSI service should run
+vtsi_user: seachange
+
 # /etc/hosts entries
 host_entries: |
             192.168.80.52 cim
