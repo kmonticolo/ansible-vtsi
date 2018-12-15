@@ -20,6 +20,6 @@ sdb_username: "{{ mdb_username }}"
 sdb_password: "{{ mdb_password }}"
 mvl_login: administrator
 mvl_password: Cdci2018
-alarm_login: administrator
-alarm_password: Cdci2018
+alarm_login: "{{ mvl_login }}"
+alarm_password: "{{ mvl_password }}"
 alarm_host: "{{ mdb_host }}"
