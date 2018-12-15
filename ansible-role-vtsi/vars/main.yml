@@ -27,10 +27,12 @@ vtsi_host: VTSI
 snmp_address: ""
 mdb_username: sa
 mdb_password: Cdci2010
+# by default sdb and mdb credentials are the same
 sdb_username: "{{ mdb_username }}"
 sdb_password: "{{ mdb_password }}"
 mvl_login: administrator
 mvl_password: Cdci2018
+# by default alarm and mvl credentials are the same
 alarm_login: "{{ mvl_login }}"
 alarm_password: "{{ mvl_password }}"
 alarm_host: "{{ mdb_hostname }}"
