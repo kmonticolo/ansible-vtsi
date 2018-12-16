@@ -8,10 +8,6 @@ build: latest
 
 # on which user vTSI service should run
 vtsi_user: seachange
-
-# temporary directory
-tmp_dir: /tmp
-
 # name of hostnames
 cim_hostname: cim
 pump_hostname: pump

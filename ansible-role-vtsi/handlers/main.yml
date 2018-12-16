@@ -5,9 +5,3 @@
     name: vtsi
     state: restarted
     enabled: yes
-
-- name: start vtsi
-  service:
-    name: vtsi
-    state: started
-    enabled: yes
