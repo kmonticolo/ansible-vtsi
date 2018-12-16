@@ -1,5 +1,6 @@
 [vtsi]
-172.31.253.82
+#172.31.253.82
+192.168.1.115
 [vtsi:vars]
 ansible_ssh_user=vagrant
 ansible_ssh_password=vagrant
