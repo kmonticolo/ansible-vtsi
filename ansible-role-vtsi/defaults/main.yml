@@ -2,3 +2,5 @@
 # defaults file for ansible-role-vtsi
 # default vtsi directory
 vtsi_directory: /seachange/local/vtsi
+# temporary directory
+tmp_dir: /tmp
