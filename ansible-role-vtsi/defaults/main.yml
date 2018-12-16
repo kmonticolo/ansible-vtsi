@@ -10,3 +10,4 @@ database_mdb_db_name: mpeg
 database_sdb_db_name: mpeg
 alarm_share: C_DRIVE
 alarm_path: cdci/alarms/DATA/ALARMS.DAT
+alarm_domain: NIGHTSPOT
