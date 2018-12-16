@@ -7,3 +7,4 @@ tmp_dir: /tmp
 database_mdb_port: 1433
 database_sdb_port: 1433
 database_mdb_db_name: mpeg
+database_sdb_db_name: mpeg
