@@ -4,3 +4,4 @@
 vtsi_directory: /seachange/local/vtsi
 # temporary directory
 tmp_dir: /tmp
+database_mdb_port: 1433
