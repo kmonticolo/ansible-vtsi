@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/dtdie7a14h3akhsw/branch/master?svg=true)](https://ci.appveyor.com/project/kmonticolo/ansible-vtsi/branch/master)
+
 Role Name
 =========
 
