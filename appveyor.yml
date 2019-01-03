@@ -8,3 +8,5 @@ environment:
 # Debugging via SSH
 init:
 - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+
+build: off
