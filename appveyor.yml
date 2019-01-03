@@ -11,5 +11,8 @@ init:
 
 install:
 - sudo apt-get -yq install python-pip
+- sudo pip install ansible
+# Ansible correctly installed?
+- ansible --version
 
 build: off
