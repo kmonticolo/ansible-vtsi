@@ -44,7 +44,7 @@
 - name: Find rpm files to install
   find:
     paths: "{{ tmp_dir }}/vtsi-kit/rpms/"
-    patterns: '*.rpm'
+    patterns: 'jdk*.rpm,seachange*.rpm,vtsi*.rpm'
   register: rpms
 
 - name: Install rpms
