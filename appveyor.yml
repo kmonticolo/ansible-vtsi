@@ -14,5 +14,8 @@ install:
 - sudo pip install ansible
 # Ansible correctly installed?
 - ansible --version
+- sh: sudo ansible-playbook vtsi.yml --syntax-check
 
 build: off
+
+
