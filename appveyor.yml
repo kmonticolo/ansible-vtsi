@@ -9,4 +9,13 @@ environment:
 init:
 - sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
+install:
+- sudo apt-get -yq install python-pip
+- sudo pip install ansible
+# Ansible correctly installed?
+- ansible --version
+- sh: sudo ansible-playbook vtsi.yml --syntax-check
+
 build: off
+
+
