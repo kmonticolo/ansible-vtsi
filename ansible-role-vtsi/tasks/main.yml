@@ -10,8 +10,11 @@
 
 - name: Ensure group "{{ vtsi_user }}" exists
   group:
-    name: "{{ vtsi_user }}"
+    name: {{ item }}"
     state: present
+  loop:
+  - wheel
+  - "{{ vtsi_user }}"
 
 - name: Ensure user "{{ vtsi_user }}" exists
   user:
