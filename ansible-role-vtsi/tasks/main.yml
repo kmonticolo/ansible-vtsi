@@ -31,7 +31,7 @@
   check_mode: no
 
 - name: Run migrate.sh
-  command: /bin/sh migration/migrate.sh
+  command: /bin/bash migration/migrate.sh
   args:
     chdir: "{{ tmp_dir }}/vtsi-kit"
   when: not vtsi_pid.stat.exists
