@@ -1,2 +1,6 @@
 ---
 # handlers file for ansible-role-pump
+- name: Restart pump services
+  service:
+    name: CCURtimemon
+    state: restarted
