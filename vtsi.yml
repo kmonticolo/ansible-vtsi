@@ -10,3 +10,9 @@
   gather_facts: false
   roles:
   - { role: ansible-role-vtsi, tags: vtsi }
+
+- hosts: cim
+  become: yes
+  gather_facts: false
+  roles:
+  - { role: ansible-role-cim, tags: cim }
