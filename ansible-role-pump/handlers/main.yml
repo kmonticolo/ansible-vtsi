@@ -1,6 +1,18 @@
 ---
 # handlers file for ansible-role-pump
-- name: Restart pump services
+- name: Restart ccurtimemon service
   service:
     name: CCURtimemon
     state: restarted
+
+- name: Restart VOD
+  service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - CCURmhfrm
+    - CCURmhcm
+    - CCURmhgs
+    - CCURmhsp
+    - CCURmhvp
+    - CCURmhrtc
