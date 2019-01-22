@@ -28,7 +28,7 @@
   check_mode: no
 
 - name: Run migrate.sh
-  command: /bin/sh migration/migrate.sh
+  command: /bin/bash migration/migrate.sh
   args:
     chdir: "{{ tmp_dir }}/vtsi-kit"
   when: not vtsi_pid.stat.exists
@@ -36,7 +36,7 @@
 - name: Find rpm files to install
   find:
     paths: "{{ tmp_dir }}/vtsi-kit/rpms/"
-    patterns: '*.rpm'
+    patterns: 'jdk*.rpm,seachange*.rpm,vtsi*.rpm'
   register: rpms
 
 - name: Install rpms

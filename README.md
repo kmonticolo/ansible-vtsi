@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/dtdie7a14h3akhsw/branch/master?svg=true)](https://ci.appveyor.com/project/kmonticolo/ansible-vtsi/branch/master)
+
 Role Name
 =========
 
@@ -47,7 +49,7 @@ Including an example of how to use your role (for instance, with variables passe
 Running
 -------
 ```
-$ ansible-playbook -i inventory vtsi.yml
+$ ansible-playbook -i inventory inventories/vtsi.yml
 ```
 Testing
 -------
