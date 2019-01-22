@@ -1,6 +1,5 @@
 ---
 # tasks file for ansible-role-cim
-
 - name: Change Library Address in cim.cfg
   lineinfile:
     path: "{{ cim_config }}"
