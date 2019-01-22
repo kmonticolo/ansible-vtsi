@@ -3,7 +3,7 @@
   become: yes
   gather_facts: false
   roles:
-  - { role: hosts, tags: hosts }
+  - { role: ansible-role-hosts, tags: hosts }
 
 - hosts: vtsi
   become: yes
