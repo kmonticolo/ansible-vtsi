@@ -1,2 +1,3 @@
 ---
 # defaults file for ansible-role-pump
+ccurtimemon:  /etc/sysconfig/CCURtimemon
