@@ -16,3 +16,9 @@
   gather_facts: false
   roles:
   - { role: ansible-role-cim, tags: cim }
+
+- hosts: pump
+  become: yes
+  gather_facts: false
+  roles:
+  - { role: ansible-role-pump, tags: pump }
