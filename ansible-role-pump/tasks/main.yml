@@ -1,2 +1,55 @@
 ---
 # tasks file for ansible-role-pump
+
+- name: Change external TimeSource in CCURtimemon
+  lineinfile:
+    path: "{{ ccurtimemon }}"
+    regexp: '^EXTERNAL_TS='
+    line: 'EXTERNAL_TS={{ externalts_ip }}'
+  notify: Restart ccurtimemon service
+
+- name: Change primary TimeSource in CCURtimemon
+  lineinfile:
+    path: "{{ ccurtimemon }}"
+    regexp: '^PRIMARY_TS='
+    line: 'PRIMARY_TS={{ pump_ip }}'
+  notify: Restart ccurtimemon service
+
+- name: Run ntpconfig
+  command: ntpconfig /etc
+  changed_when: false
+
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Setup
+  setup:
+
+- name: Change interface name in resource.cfg
+  lineinfile:
+    path: "{{ mhresource }}"
+    regexp: '^Define: IP	{{ item }}  '
+    line: 'Define: IP	{{ item }}  {{ ansible_default_ipv4.interface }} 	   eth1000'
+  loop:
+    - control
+    - egress
+    - ingest
+  notify: Restart VOD
+
+- name: Change disk size in resource.cfg
+  lineinfile:
+    path: "{{ ccurtimemon }}"
+    regexp: 'Define: Disk    1s0'
+    line: 'Define: Disk    1s0             /r1             VIRTUAL_1MB * 64'
+  notify: Restart VOD
+
+- name: Edit /etc/opt/MediaHawk/VODAddressMap
+  lineinfile:
+    path: /etc/opt/MediaHawk/VODAddressMap
+    state: present
+    line: '{{ ansible_default_ipv4.network }} {{ ansible_default_ipv4.netmask }} {{ ansible_default_ipv4.address }}'
+  notify: Restart VOD
+
+- name: Flush handlers
+  meta: flush_handlers
