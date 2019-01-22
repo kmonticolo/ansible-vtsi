@@ -8,15 +8,6 @@ build: latest
 
 # on which user vTSI service should run
 vtsi_user: seachange
-# name of hostnames
-cim_hostname: cim
-pump_hostname: pump
-mdb_hostname: SPOTDB2016
-
-# IP of hosts
-cim_ip: 192.168.80.52
-pump_ip: 192.168.80.53
-mdb_ip: 192.168.80.50
 
 # entries in vtsi properties configuration file
 vtsi_host: VTSI

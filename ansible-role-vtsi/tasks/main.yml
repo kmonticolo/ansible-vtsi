@@ -1,14 +1,5 @@
 ---
 # tasks file for ansible-role-vtsi
-
-- name: Generate /etc/hosts file
-  template:
-    src=etc/hosts.j2
-    dest=/etc/hosts
-  notify:
-    - restart vtsi
-  tags: hosts
-
 - name: Ensure group "{{ vtsi_user }}" exists
   group:
     name: "{{ vtsi_user }}"
