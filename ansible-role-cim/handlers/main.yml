@@ -1,2 +1,10 @@
 ---
 # handlers file for ansible-role-cim
+- name: Restart services
+  service:
+    name: "{{ item }}"
+    state: restarted
+  loop:
+    - CCURorigindb
+    - CCURtomcat
+    - CCURcim
