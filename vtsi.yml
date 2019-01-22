@@ -1,4 +1,10 @@
 ---
+- hosts: all
+  become: yes
+  gather_facts: false
+  roles:
+  - { role: hosts, tags: hosts }
+
 - hosts: vtsi
   become: yes
   gather_facts: false
