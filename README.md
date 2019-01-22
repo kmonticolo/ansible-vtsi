@@ -4,6 +4,8 @@ Role Name
 =========
 
 ansible-role-vtsi role installs and configures vTSI application on Centos 7 server.
+ansible-role-cim role configures CIM application on Centos 7 server.
+ansible-role-pump role configures PUMP application on Centos 7 server.
 
 Requirements
 ------------
