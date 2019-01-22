@@ -1,22 +1,23 @@
 ---
 # tasks file for ansible-role-cim
+- name: stat configuration
+  stat:
+    path: "{{ cim_config }}"
+  register: cim_cfg
+
 - name: Change Library Address in cim.cfg
   lineinfile:
-    path: /etc/opt/MediaHawk/cim.cfg
-    regexp: '^Library Address: .*$'
+    path: "{{ cim_config }}"
+    regexp: '^Library Address: '
     line: 'Library Address: {{ pump_ip }}'
+  notify: Restart services
 
 - name: Change Virtual IP in cim.cfg
   lineinfile:
-    path: /etc/opt/MediaHawk/cim.cfg
-    regexp: '^CIM Virtual IP: .*$'
+    path: "{{ cim_config }}"
+    regexp: '^CIM Virtual IP: '
     line: 'CIM Virtual IP: {{ cim_ip }}'
+  notify: Restart services
 
-- name: Restart services
-  service:
-    name: "{{ item }}"
-    state: restarted
-  loop:
-    - CCURorigindb
-    - CCURtomcat
-    - CCURcim
+- name: Flush handlers
+  meta: flush_handlers
