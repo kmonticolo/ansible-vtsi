@@ -67,6 +67,7 @@
     name: vtsi
     state: started
     enabled: yes
+  ignore_errors: true
 
 - name: Make sure vTSI is responding on configured port
   wait_for: port={{ item }} delay=3 timeout=300
