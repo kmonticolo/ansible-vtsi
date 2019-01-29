@@ -13,7 +13,7 @@ Requirements
 
 Role Variables
 --------------
-Role variables are to be set in `ansible-vtsi/ansible-role-vtsi/vars/main.yml`
+Role variables are to be set in `ansible-vtsi/ansible-role-vtsi/vars/main.yml` and `ansible-vtsi/vars/hosts.yml`
 
 You may need to change mdb and mvl entries only, the rest should work as configured.
 
