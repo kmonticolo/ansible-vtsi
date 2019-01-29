@@ -19,12 +19,8 @@
   command: ntpconfig /etc
   changed_when: false
 
-
 - name: Flush handlers
   meta: flush_handlers
-
-- name: Setup
-  setup:
 
 - name: Change interface name in resource.cfg
   lineinfile:
