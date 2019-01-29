@@ -1,0 +1,17 @@
+[cim]
+10.48.77.52
+[cim:vars]
+ansible_ssh_user=root
+ansible_ssh_password=generic
+
+[pump]
+10.48.77.53
+[pump:vars]
+ansible_ssh_user=root
+ansible_ssh_password=generic
+
+[vtsi]
+10.48.77.56
+[vtsi:vars]
+ansible_ssh_user=root
+ansible_ssh_password=generic
