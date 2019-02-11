@@ -16,14 +16,14 @@
     dest: /etc/hostname
     line: "{{ cim_hostname }}"
 
-- name: Change Library Address to PUMP IP in cim.cfg
+- name: Change Library Address to PUMP IP in {{ cim_config }}
   lineinfile:
     path: "{{ cim_config }}"
     regexp: '^Library Address: '
     line: 'Library Address: {{ pump_ip }}'
   notify: Restart services
 
-- name: Change Virtual IP to CIM IP in cim.cfg
+- name: Change Virtual IP to CIM IP in {{ cim_config }}
   lineinfile:
     path: "{{ cim_config }}"
     regexp: '^CIM Virtual IP: '
