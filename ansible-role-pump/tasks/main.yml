@@ -4,12 +4,17 @@
   include_vars:
     file: hosts.yml
 
+- name: Touch hostname
+  file:
+    state: touch
+    path: /etc/hostname
+    modification_time: "preserve"
+    access_time: "preserve"
+
 - name: Set hostname
   lineinfile:
     dest: /etc/hostname
-    regexp: '^'
-    line: "{{ cim_hostname }}"
-    backrefs: yes
+    line: "{{ pump_hostname }}"
 
 - name: Change external TimeSource in CCURtimemon
   lineinfile:
@@ -32,71 +37,10 @@
 - name: Flush handlers
   meta: flush_handlers
 
-- name: Change Define MHSP in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Define: MHSP'
-    line: 'Define: MHSP {{ pump_hostname }}'
-  notify: Restart VOD
-
-- name: Change Define MHVP in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Define: MHVP'
-    line: 'Define: MHVP {{ pump_hostname }}'
-  notify: Restart VOD
-
-- name: Change Define MHRTC in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Define: MHRTC'
-    line: 'Define: MHRTC {{ pump_hostname }}'
-  notify: Restart VOD
-
-- name: Change Configure MHVP in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Configure:	MHVP'
-    line: 'Configure:	MHVP	{{ pump_hostname }}'
-  notify: Restart VOD
-
-- name: Change Configure MHRTC in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Configure:	MHRTC'
-    line: 'Configure:	MHRTC	{{ pump_hostname }}'
-  notify: Restart VOD
-
-- name: Change Define MHRTC in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Define: MHRTC'
-    line: 'Define: MHRTC {{ pump_hostname }}'
-  notify: Restart VOD
-
-- name: Change Define MHSP in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Define: MHSP'
-    line: 'Define: MHSP {{ pump_hostname }}'
-  notify: Restart VOD
-
-- name: Change Define interface name in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Define: IP	{{ item }}  '
-    line: 'Define: IP	{{ item }}  {{ ansible_default_ipv4.interface }} 	   eth1000'
-  loop:
-    - control
-    - egress
-    - ingest
-  notify: Restart VOD
-
-- name: Change Define disk size in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: 'Define: Disk'
-    line: 'Define: Disk    1s0             /r1             VIRTUAL_1MB * 64'
+- name: Generate {{ mhresource }} file
+  template:
+    src=templates/resource.cfg.j2
+    dest="{{ mhresource }}"
   notify: Restart VOD
 
 - name: Edit /etc/opt/MediaHawk/VODAddressMap
