@@ -1,19 +1,19 @@
 ---
 - hosts: all
   become: yes
-  gather_facts: false
+  gather_facts: true
   roles:
   - { role: ansible-role-hosts, tags: hosts }
 
 - hosts: vtsi
   become: yes
-  gather_facts: false
+  gather_facts: true
   roles:
   - { role: ansible-role-vtsi, tags: vtsi }
 
 - hosts: cim
   become: yes
-  gather_facts: false
+  gather_facts: true
   roles:
   - { role: ansible-role-cim, tags: cim }
 
