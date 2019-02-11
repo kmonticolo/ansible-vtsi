@@ -1,5 +1,15 @@
 ---
 # tasks file for ansible-role-pump
+- name: Include vars
+  include_vars:
+    file: hosts.yml
+
+- name: Set hostname
+  lineinfile:
+    dest: /etc/hostname
+    regexp: '^'
+    line: "{{ cim_hostname }}"
+    backrefs: yes
 
 - name: Change external TimeSource in CCURtimemon
   lineinfile:
@@ -21,6 +31,55 @@
 
 - name: Flush handlers
   meta: flush_handlers
+
+- name: Change MHSP in resource.cfg
+  lineinfile:
+    path: "{{ mhresource }}"
+    regexp: '^Define: MHSP'
+    line: 'Define: MHSP {{ pump_hostname }}'
+  notify: Restart VOD
+
+- name: Change MHVP in resource.cfg
+  lineinfile:
+    path: "{{ mhresource }}"
+    regexp: '^Define: MHVP'
+    line: 'Define: MHVP {{ pump_hostname }}'
+  notify: Restart VOD
+
+- name: Change MHRTC in resource.cfg
+  lineinfile:
+    path: "{{ mhresource }}"
+    regexp: '^Define: MHRTC'
+    line: 'Define: MHRTC {{ pump_hostname }}'
+  notify: Restart VOD
+
+- name: Change MHVP in resource.cfg
+  lineinfile:
+    path: "{{ mhresource }}"
+    regexp: '^Configure:	MHVP	pump'
+    line: 'Configure:	MHVP	{{ pump_hostname }}'
+  notify: Restart VOD
+
+- name: Change MHRTC in resource.cfg
+  lineinfile:
+    path: "{{ mhresource }}"
+    regexp: '^Configure:	MHRTC	pump'
+    line: 'Configure:	MHRTC	{{ pump_hostname }}'
+  notify: Restart VOD
+
+- name: Change MHRTC in resource.cfg
+  lineinfile:
+    path: "{{ mhresource }}"
+    regexp: '^Define: MHRTC'
+    line: 'Define: MHRTC {{ pump_hostname }}'
+  notify: Restart VOD
+
+- name: Change MHSP in resource.cfg
+  lineinfile:
+    path: "{{ mhresource }}"
+    regexp: '^Define: MHSP'
+    line: 'Define: MHSP {{ pump_hostname }}'
+  notify: Restart VOD
 
 - name: Change interface name in resource.cfg
   lineinfile:
