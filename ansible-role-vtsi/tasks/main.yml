@@ -1,5 +1,16 @@
 ---
 # tasks file for ansible-role-vtsi
+- name: Include vars
+  include_vars:
+    file: hosts.yml
+
+- name: Set hostname
+  lineinfile:
+    dest: /etc/hostname
+    regexp: '^'
+    line: "{{ cim_hostname }}"
+    backrefs: yes
+
 - name: Ensure group "{{ vtsi_user }}" exists
   group:
     name: "{{ vtsi_user }}"
@@ -10,13 +21,12 @@
     name: "{{ vtsi_user }}"
     shell: /bin/bash
     groups: "{{ vtsi_user }},wheel"
+    password: $6$baaEcM7F$gy7oQtnQkE4hWci2gD6uI0x.jtPDFMFqCFlEwZAdnEnnPxa19Wp1kN4g4XJ33siKto5SewQ.zGc.9zOiGrrym/
 
-- name: Unarchive {{ build }} vtsi
-  unarchive:
-    src: "{{ mirror }}"
-    dest: "{{ tmp_dir }}"
-    remote_src: yes
-    creates: "{{ tmp_dir }}/vtsi-kit/"
+- name: Stop vTSI service
+  service:
+    name: vtsi
+    state: stopped
 
 - name: Check if vtsi PID file exists
   stat:
@@ -26,6 +36,18 @@
   failed_when: no
   become: no
   check_mode: no
+
+- name: Remove H2 DB to avoid conflicts on environments
+  file:
+    path: /seachange/local/vtsi/bin/h2.mv.db
+    state: absent
+
+- name: Unarchive {{ build }} vtsi
+  unarchive:
+    src: "{{ mirror }}"
+    dest: "{{ tmp_dir }}"
+    remote_src: yes
+    creates: "{{ tmp_dir }}/vtsi-kit/"
 
 - name: Run migrate.sh
   command: /bin/bash migration/migrate.sh
