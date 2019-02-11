@@ -1,13 +1,24 @@
 ---
 # tasks file for ansible-role-cim
-- name: Change Library Address in cim.cfg
+- name: Include vars
+  include_vars:
+    file: hosts.yml
+
+- name: Set hostname
+  lineinfile:
+    dest: /etc/hostname
+    regexp: '^'
+    line: "{{ cim_hostname }}"
+    backrefs: yes
+
+- name: Change Library Address to PUMP IP in cim.cfg
   lineinfile:
     path: "{{ cim_config }}"
     regexp: '^Library Address: '
     line: 'Library Address: {{ pump_ip }}'
   notify: Restart services
 
-- name: Change Virtual IP in cim.cfg
+- name: Change Virtual IP to CIM IP in cim.cfg
   lineinfile:
     path: "{{ cim_config }}"
     regexp: '^CIM Virtual IP: '
