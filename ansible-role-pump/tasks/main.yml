@@ -94,7 +94,7 @@
 
 - name: Change disk size in resource.cfg
   lineinfile:
-    path: "{{ ccurtimemon }}"
+    path: "{{ mhresource }}"
     regexp: 'Define: Disk    1s0'
     line: 'Define: Disk    1s0             /r1             VIRTUAL_1MB * 64'
   notify: Restart VOD
