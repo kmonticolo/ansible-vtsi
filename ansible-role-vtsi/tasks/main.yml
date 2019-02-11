@@ -4,12 +4,17 @@
   include_vars:
     file: hosts.yml
 
+- name: Touch hostname
+  file:
+    state: touch
+    path: /etc/hostname
+    modification_time: "preserve"
+    access_time: "preserve"
+
 - name: Set hostname
   lineinfile:
     dest: /etc/hostname
-    regexp: '^'
-    line: "{{ cim_hostname }}"
-    backrefs: yes
+    line: "{{ vtsi_hostname }}"
 
 - name: Ensure group "{{ vtsi_user }}" exists
   group:
