@@ -95,9 +95,9 @@
     state: started
     enabled: yes
   ignore_errors: true
-
-- name: Make sure vTSI is responding on configured port
-  wait_for: port={{ item }} delay=3 timeout=300
-  with_items:
-    - 8080
-    - 8021
+#
+# - name: Make sure vTSI is responding on configured port
+#   wait_for: port={{ item }} delay=3 timeout=300
+#   with_items:
+#     - 8080
+#     - 8021
