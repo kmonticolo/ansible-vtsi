@@ -1,7 +1,7 @@
 ---
 - hosts: all
   become: yes
-  gather_facts: true
+  gather_facts: false
   roles:
   - { role: ansible-role-hosts, tags: hosts }
 
