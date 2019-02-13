@@ -43,11 +43,11 @@
     dest="{{ mhresource }}"
   notify: Restart VOD
 
-- name: Edit /etc/opt/MediaHawk/VODAddressMap
-  lineinfile:
-    path: /etc/opt/MediaHawk/VODAddressMap
-    state: present
-    line: '{{ ansible_default_ipv4.network }} {{ ansible_default_ipv4.netmask }} {{ ansible_default_ipv4.address }}'
+- name: Make sure /etc/opt/MediaHawk/VODAddressMap is configured
+  copy:
+    content: '{{ ansible_default_ipv4.network }} {{ ansible_default_ipv4.netmask }} {{ ansible_default_ipv4.address }}'
+    dest: /etc/opt/MediaHawk/VODAddressMap
+    force: no
   notify: Restart VOD
 
 - name: Flush handlers
