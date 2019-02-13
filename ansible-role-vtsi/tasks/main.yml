@@ -4,17 +4,11 @@
   include_vars:
     file: hosts.yml
 
-- name: Touch hostname
-  file:
-    state: touch
-    path: /etc/hostname
-    modification_time: "preserve"
-    access_time: "preserve"
-
-- name: Set hostname
-  lineinfile:
+- name: Set hostname in /etc/hostname
+  copy:
+    content: "{{ vtsi_hostname }}"
     dest: /etc/hostname
-    line: "{{ vtsi_hostname }}"
+    force: no
 
 - name: Ensure group "{{ vtsi_user }}" exists
   group:

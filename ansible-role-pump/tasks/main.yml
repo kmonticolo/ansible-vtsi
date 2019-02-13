@@ -4,17 +4,11 @@
   include_vars:
     file: hosts.yml
 
-- name: Touch hostname
-  file:
-    state: touch
-    path: /etc/hostname
-    modification_time: "preserve"
-    access_time: "preserve"
-
-- name: Set hostname
-  lineinfile:
+- name: Set hostname in /etc/hostname
+  copy:
+    content: "{{ pump_hostname }}"
     dest: /etc/hostname
-    line: "{{ pump_hostname }}"
+    force: no
 
 - name: Change external TimeSource in CCURtimemon
   lineinfile:
