@@ -3,6 +3,26 @@
 - name: Include vars
   include_vars:
     file: hosts.yml
+  vars:
+  
+# # - name: Set IP facts
+#   set_fact:
+- debug:
+    msg: "{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}"
+
+- name: Add instances to host group
+  local_action: add_host hostname={{ hostvars[item].ansible_default_ipv4.address }} groupname=temp_group
+  with_items: "{{ play_hosts }}"
+  run_once: True
+
+
+- name: Set IP facts
+  set_fact:
+      ip: "{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}"
+      host: "{{ hostvars[inventory_hostname]['ansible_hostname'] }}"
+
+- debug:
+    msg: "{{ ip }} {{ host }}"
 
 - name: Generate /etc/hosts file
   template:
