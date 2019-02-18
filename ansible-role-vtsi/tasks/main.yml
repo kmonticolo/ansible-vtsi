@@ -80,6 +80,10 @@
   notify:
     - restart vtsi
 
+- name: Run daemon-reload before invoking handlers
+  command: systemctl daemon-reload
+  changed_when: no
+  
 - name: Flush handlers
   meta: flush_handlers
 
