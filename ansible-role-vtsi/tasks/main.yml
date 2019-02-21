@@ -92,7 +92,7 @@
     name: vtsi
     state: started
     enabled: yes
-  ignore_errors: true
+  ignore_errors: true # due to broken tanuki wrapper return codes
 #
 # - name: Make sure vTSI is responding on configured port
 #   wait_for: port={{ item }} delay=3 timeout=300
