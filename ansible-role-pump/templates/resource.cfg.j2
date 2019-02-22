@@ -9,7 +9,7 @@ Define: MHSP {{ pump_hostname }}
 ## MHVP definitions
 ##
 
-Define: MHVP {{ pump_hostname }}
+Define: MHVP {{ pump_hostname }} #Ftpupld password port minfast maxfast
 
 ##
 ## Real Time Catcher definitions
@@ -28,20 +28,19 @@ Define: MHRTC	{{ pump_hostname }}
 ## 16s0 and 17s0 are members of a DiskSet.
 ##
 
-Define: Disk	1s0		/r1		VIRTUAL_1MB * 64
+Define: Disk	1s0		/r1		VIRTUAL_1MB * 128
 
 ##
 ## Network (output device) definitions
 ##
 
-# Control interface
-Define: IP	control   {{ ansible_default_ipv4.interface }}     eth1000
+Define: IP	control  {{ ansible_default_ipv4.interface }} 	   eth10000
 
 # Egress interface
-# Define: IP	egress   {{ ansible_default_ipv4.interface }}     eth1000
+Define: IP	egress   {{ ansible_default_ipv4.interface }}     eth10000
 
 # Content ingest interface
-# Define: IP      ingest   {{ ansible_default_ipv4.interface }}     eth1000
+Define: IP      ingest   {{ ansible_default_ipv4.interface }}     eth10000
 
 ##
 ## QAM definitions
@@ -54,16 +53,16 @@ Define: QAM 1001 VLC AnnexB-QAM256
 ## Attach networks
 ##
 
-Configure: IP control
+Configure: IP egress
 Attach: QAM 1000 IPAddress 10.76.124.10
-Attach: QAM 1001 IPAddress 10.211.55.2
+Attach: QAM 1001 IPAddress 10.49.1.1
 
 ##
 ## VP config
 ##
 Configure:	MHVP	{{ pump_hostname }}
 Attach: 	Disk	1s0
-Attach:		IP	control
+Attach:		IP	egress
 
 ##
 ## Real Time Catcher Configuration
@@ -71,4 +70,4 @@ Attach:		IP	control
 
 Configure:	MHRTC	{{ pump_hostname }}
 Attach:		Disk	1s0
-Attach:		IP	control
+Attach:		IP	ingest
