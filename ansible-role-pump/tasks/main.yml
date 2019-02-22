@@ -37,7 +37,7 @@
     dest="{{ mhresource }}"
   notify: Restart VOD
 
-- name: Make sure /etc/opt/MediaHawk/VODAddressMap is configured
+- name: Make sure "{{ vodaddressmap }}" is configured
   copy:
     content: '{{ ansible_default_ipv4.network }} {{ ansible_default_ipv4.netmask }} {{ ansible_default_ipv4.address }}'
     dest: "{{ vodaddressmap }}"
