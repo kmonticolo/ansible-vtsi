@@ -1,5 +1,14 @@
 ---
 # tasks file for ansible-role-pump
+- name: Include vars
+  include_vars:
+    file: hosts.yml
+
+- name: Set hostname in /etc/hostname
+  copy:
+    content: "{{ pump_hostname }}"
+    dest: /etc/hostname
+    force: no
 
 - name: Change external TimeSource in CCURtimemon
   lineinfile:
@@ -22,29 +31,17 @@
 - name: Flush handlers
   meta: flush_handlers
 
-- name: Change interface name in resource.cfg
-  lineinfile:
-    path: "{{ mhresource }}"
-    regexp: '^Define: IP	{{ item }}  '
-    line: 'Define: IP	{{ item }}  {{ ansible_default_ipv4.interface }} 	   eth1000'
-  loop:
-    - control
-    - egress
-    - ingest
+- name: Generate {{ mhresource }} file
+  template:
+    src=templates/resource.cfg.j2
+    dest="{{ mhresource }}"
   notify: Restart VOD
 
-- name: Change disk size in resource.cfg
-  lineinfile:
-    path: "{{ ccurtimemon }}"
-    regexp: 'Define: Disk    1s0'
-    line: 'Define: Disk    1s0             /r1             VIRTUAL_1MB * 64'
-  notify: Restart VOD
-
-- name: Edit /etc/opt/MediaHawk/VODAddressMap
-  lineinfile:
-    path: /etc/opt/MediaHawk/VODAddressMap
-    state: present
-    line: '{{ ansible_default_ipv4.network }} {{ ansible_default_ipv4.netmask }} {{ ansible_default_ipv4.address }}'
+- name: Make sure "{{ vodaddressmap }}" is configured
+  copy:
+    content: '{{ ansible_default_ipv4.network }} {{ ansible_default_ipv4.netmask }} {{ ansible_default_ipv4.address }}'
+    dest: "{{ vodaddressmap }}"
+    force: yes
   notify: Restart VOD
 
 - name: Flush handlers

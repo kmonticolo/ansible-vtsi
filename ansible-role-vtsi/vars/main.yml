@@ -2,6 +2,7 @@
 # vars file for ansible-role-vtsi
 
 # mirror with packages
+
 mirror: http://172.31.67.7/artifacts/vtsi/master/{{ build }}/vtsi-kit.tar.gz
 
 # which build to use

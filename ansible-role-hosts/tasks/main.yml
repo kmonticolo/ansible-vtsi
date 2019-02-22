@@ -4,6 +4,26 @@
   include_vars:
     file: hosts.yml
 
+- debug:
+    msg: "{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}"
+
+- name: Add instances to host group
+  local_action: add_host hostname={{ hostvars[item].ansible_default_ipv4.address }} groupname=ip_group
+  with_items: "{{ play_hosts }}"
+  run_once: True
+
+- name: Set IP facts
+  set_fact:
+    cim_ip: "{{ hostvars[groups['ip_group'][1]]['ansible_default_ipv4']['address'] }}"
+    pump_ip: "{{ hostvars[groups['ip_group'][0]]['ansible_default_ipv4']['address'] }}"
+    vtsi_ip: "{{ hostvars[groups['ip_group'][2]]['ansible_default_ipv4']['address'] }}"
+
+- debug:
+    msg:
+      - cim_ip "{{ cim_ip }}"
+      - pump_ip "{{ pump_ip }}"
+      - vtsi_ip "{{ vtsi_ip }}"
+
 - name: Generate /etc/hosts file
   template:
     src=hosts.j2

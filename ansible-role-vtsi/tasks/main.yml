@@ -1,5 +1,15 @@
 ---
 # tasks file for ansible-role-vtsi
+- name: Include vars
+  include_vars:
+    file: hosts.yml
+
+- name: Set hostname in /etc/hostname
+  copy:
+    content: "{{ vtsi_hostname }}"
+    dest: /etc/hostname
+    force: no
+
 - name: Ensure group "{{ vtsi_user }}" exists
   group:
     name: "{{ vtsi_user }}"
@@ -10,13 +20,12 @@
     name: "{{ vtsi_user }}"
     shell: /bin/bash
     groups: "{{ vtsi_user }},wheel"
+    password: $6$baaEcM7F$gy7oQtnQkE4hWci2gD6uI0x.jtPDFMFqCFlEwZAdnEnnPxa19Wp1kN4g4XJ33siKto5SewQ.zGc.9zOiGrrym/
 
-- name: Unarchive {{ build }} vtsi
-  unarchive:
-    src: "{{ mirror }}"
-    dest: "{{ tmp_dir }}"
-    remote_src: yes
-    creates: "{{ tmp_dir }}/vtsi-kit/"
+- name: Stop vTSI service
+  service:
+    name: vtsi
+    state: stopped
 
 - name: Check if vtsi PID file exists
   stat:
@@ -26,6 +35,18 @@
   failed_when: no
   become: no
   check_mode: no
+
+- name: Remove H2 DB to avoid conflicts on environments
+  file:
+    path: /seachange/local/vtsi/bin/h2.mv.db
+    state: absent
+
+- name: Unarchive {{ build }} vtsi
+  unarchive:
+    src: "{{ mirror }}"
+    dest: "{{ tmp_dir }}"
+    remote_src: yes
+    creates: "{{ tmp_dir }}/vtsi-kit/"
 
 - name: Run migrate.sh
   command: /bin/bash migration/migrate.sh
@@ -59,6 +80,10 @@
   notify:
     - restart vtsi
 
+- name: Run daemon-reload before invoking handlers
+  command: systemctl daemon-reload
+  changed_when: no
+  
 - name: Flush handlers
   meta: flush_handlers
 
@@ -67,9 +92,10 @@
     name: vtsi
     state: started
     enabled: yes
-
-- name: Make sure vTSI is responding on configured port
-  wait_for: port={{ item }} delay=3 timeout=300
-  with_items:
-    - 8080
-    - 8021
+  ignore_errors: true # due to broken tanuki wrapper return codes
+#
+# - name: Make sure vTSI is responding on configured port
+#   wait_for: port={{ item }} delay=3 timeout=300
+#   with_items:
+#     - 8080
+#     - 8021

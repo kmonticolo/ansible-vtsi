@@ -1,0 +1,73 @@
+# {{ ansible_managed }}
+##
+## MHSP definitions
+##
+
+Define: MHSP {{ pump_hostname }}
+
+##
+## MHVP definitions
+##
+
+Define: MHVP {{ pump_hostname }} #Ftpupld password port minfast maxfast
+
+##
+## Real Time Catcher definitions
+##
+
+Define: MHRTC	{{ pump_hostname }}
+
+##
+## Disk definitions
+##
+## First entry says "1s0" has the capacity of a 14-way stripe of
+## SEAGATE_ST3146707LC disks.  A Mediastore configured as two 7+1
+## RAID5 devices has this capacity.
+## The video file system for this disk is mounted as "/r1".
+## 11s0, 12s0, 13s0, 14s0, and 15s0 are members of DiskSubsets.
+## 16s0 and 17s0 are members of a DiskSet.
+##
+
+Define: Disk	1s0		/r1		VIRTUAL_1MB * 128
+
+##
+## Network (output device) definitions
+##
+
+Define: IP	control  {{ ansible_default_ipv4.interface }} 	   eth10000
+
+# Egress interface
+Define: IP	egress   {{ ansible_default_ipv4.interface }}     eth10000
+
+# Content ingest interface
+Define: IP      ingest   {{ ansible_default_ipv4.interface }}     eth10000
+
+##
+## QAM definitions
+##
+
+Define: QAM 1000 HarmonicNSG9116 AnnexB-QAM256
+Define: QAM 1001 VLC AnnexB-QAM256
+
+##
+## Attach networks
+##
+
+Configure: IP egress
+Attach: QAM 1000 IPAddress 10.76.124.10
+Attach: QAM 1001 IPAddress 10.49.1.1
+
+##
+## VP config
+##
+Configure:	MHVP	{{ pump_hostname }}
+Attach: 	Disk	1s0
+Attach:		IP	egress
+
+##
+## Real Time Catcher Configuration
+##
+
+Configure:	MHRTC	{{ pump_hostname }}
+Attach:		Disk	1s0
+Attach:		IP	ingest
