@@ -40,8 +40,8 @@
 - name: Make sure /etc/opt/MediaHawk/VODAddressMap is configured
   copy:
     content: '{{ ansible_default_ipv4.network }} {{ ansible_default_ipv4.netmask }} {{ ansible_default_ipv4.address }}'
-    dest: /etc/opt/MediaHawk/VODAddressMap
-    force: no
+    dest: "{{ vodaddressmap }}"
+    force: yes
   notify: Restart VOD
 
 - name: Flush handlers
