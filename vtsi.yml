@@ -20,6 +20,42 @@
   gather_facts: true
   roles:
   - { role: ansible-role-vtsi, tags: vtsi }
+  # https://wiki.schange.com/pages/viewpage.action?pageId=112770813
+  - role: oasis_roles.firewalld
+    firewalld_zone: public
+    firewalld_ports_open:
+    - proto: tcp
+      port: 445
+    - proto: udp
+      port: 1024
+    - proto: udp
+      port: 9025
+    - proto: tcp
+      port: 445
+    - proto: tcp
+      port: 554
+    - proto: tcp
+      port: 1433
+    - proto: tcp
+      port: 2024
+    - proto: tcp
+      port: 3000
+    - proto: tcp
+      port: 6021
+    - proto: tcp
+      port: 8021
+    - proto: tcp
+      port: 8080
+    - proto: tcp
+      port: 8081
+    - proto: tcp
+      port: 9010
+    - proto: tcp
+      port: 9025
+    firewalld_services:
+    - ssh
+    firewalld_become: true
+    tags: vtsi, firewall
 
 - hosts: cim
   become: yes
