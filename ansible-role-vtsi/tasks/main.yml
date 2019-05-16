@@ -22,10 +22,14 @@
     groups: "{{ vtsi_user }},wheel"
     password: $6$baaEcM7F$gy7oQtnQkE4hWci2gD6uI0x.jtPDFMFqCFlEwZAdnEnnPxa19Wp1kN4g4XJ33siKto5SewQ.zGc.9zOiGrrym/
 
+- name: Populate service facts
+  service_facts:
+
 - name: Stop vTSI service
   service:
     name: vtsi
     state: stopped
+  when: "'vtsi' in services"
 
 - name: Check if vtsi PID file exists
   stat:
@@ -47,12 +51,6 @@
     dest: "{{ tmp_dir }}"
     remote_src: yes
     creates: "{{ tmp_dir }}/vtsi-kit/"
-
-- name: Run migrate.sh
-  command: /bin/bash migration/migrate.sh
-  args:
-    chdir: "{{ tmp_dir }}/vtsi-kit"
-  when: not vtsi_pid.stat.exists
 
 - name: Find rpm files to install
   find:
@@ -83,7 +81,7 @@
 - name: Run daemon-reload before invoking handlers
   command: systemctl daemon-reload
   changed_when: no
-  
+
 - name: Flush handlers
   meta: flush_handlers
 

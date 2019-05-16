@@ -21,7 +21,7 @@
   lineinfile:
     path: "{{ ccurtimemon }}"
     regexp: '^PRIMARY_TS='
-    line: 'PRIMARY_TS={{ pump_ip }}'
+    line: 'PRIMARY_TS={{ ansible_default_ipv4.address }}'
   notify: Restart ccurtimemon service
 
 - name: Run ntpconfig
