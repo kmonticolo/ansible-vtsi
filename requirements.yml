@@ -1,0 +1,6 @@
+---
+
+# ntp role
+- src: geerlingguy.ntp
+# firewall role
+- src: oasis_roles.firewalld
