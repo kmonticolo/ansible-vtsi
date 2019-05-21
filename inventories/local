@@ -1,2 +1,6 @@
 [vtsi]
 localhost ansible_connection=local
+[cim]
+localhost ansible_connection=local
+[pump]
+localhost ansible_connection=local
