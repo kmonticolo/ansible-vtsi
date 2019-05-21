@@ -6,8 +6,8 @@ environment:
   APPVEYOR_SSH_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBgsqMkpUaAh3jDyH4UDLlNjmasIkVlghMsOR9Dk42Of+AIREFjs+npQChi+H+b7vGul0hMJwy2E9FU23TT4kCse4DOnCBLpVmGLAm2PiQZhiwz1gPasbVrvdNn2jvESzhb0GYap8KgZnFTUaS4UwckgWHOiEs8Bvbp0r6g7LMtBZpjgCLEZAfFfeS094p0lWngIw72puPEernIKTY0dLAIMLFZU/lSvLQuk0XstviXHdrcT0lQQrt7VMszFyA74e8xH1nrkq7xaK3DDVw1rnyypt8RfVnKwIfvjEvk4ft/iqVjex0RKoN6EK2UX+TO8505esyO4Av83qO61WNGR7n kmonti@kmonti
   
 # Debugging via SSH
-init:
-- sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
+#init:
+#- sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 install:
 - sudo apt-get -yq install python-pip
