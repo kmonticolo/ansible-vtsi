@@ -31,8 +31,6 @@
     - proto: udp
       port: 9025
     - proto: tcp
-      port: 445
-    - proto: tcp
       port: 554
     - proto: tcp
       port: 1433
