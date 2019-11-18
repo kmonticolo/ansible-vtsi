@@ -31,7 +31,6 @@
 - name: Flush handlers
   meta: flush_handlers
 
-
 - name: Generate {{ mhresource }} file
   template:
     src=templates/resource.cfg.j2
