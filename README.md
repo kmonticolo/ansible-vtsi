@@ -53,7 +53,7 @@ Including an example of how to use your role (for instance, with variables passe
 Running
 -------
 ```
-$ ansible-playbook -i inventory inventories/vtsi.yml
+$ ansible-playbook -i inventories/inventory vtsi.yml
 ```
 Testing
 -------
