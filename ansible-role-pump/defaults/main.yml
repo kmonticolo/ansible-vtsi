@@ -1,5 +1,6 @@
 ---
 # defaults file for ansible-role-pump
 ccurtimemon:  /etc/sysconfig/CCURtimemon
-mhresource: /etc/opt/MediaHawk/resource.cfg
-vodaddressmap: /etc/opt/MediaHawk/VODAddressMap
+mhpath: /etc/opt/MediaHawk
+mhresource: "{{ mhpath }}/resource.cfg"
+vodaddressmap: "{{ mhpath }}/VODAddressMap"
