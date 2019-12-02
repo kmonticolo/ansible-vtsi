@@ -14,6 +14,7 @@ Requirements
 
 - Centos 7
 - mirror with vTSI package
+- roles from `requirements.yml` file
 
 Role Variables
 --------------
