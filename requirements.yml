@@ -1,6 +1,6 @@
 ---
 
-# ntp role
+# ntp role, needed by every host
 - src: geerlingguy.ntp
-# firewall role
+# firewall role, needed by vtsi host
 - src: oasis_roles.firewalld
