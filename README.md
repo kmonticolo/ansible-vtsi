@@ -68,7 +68,7 @@ Then, issue the following command:
 ```
 telnet localhost 8021
 ```
-The expected response is 220 Service ready for new user.
+The expected response is `220 Service ready for new user`.
 
 License
 -------
