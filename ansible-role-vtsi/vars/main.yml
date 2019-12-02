@@ -10,6 +10,7 @@ build: latest
 
 # on which user vTSI service should run
 vtsi_user: seachange
+vtsi_group: "{{ vtsi_user }}"
 
 # entries in vtsi properties configuration file
 vtsi_host: "{{ vtsi_hostname }}"
