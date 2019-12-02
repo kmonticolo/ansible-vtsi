@@ -10,16 +10,16 @@
     dest: /etc/hostname
     force: no
 
-- name: Ensure group "{{ vtsi_user }}" exists
+- name: Ensure group "{{ vtsi_group }}" exists
   group:
-    name: "{{ vtsi_user }}"
+    name: "{{ vtsi_group }}"
     state: present
 
 - name: Ensure user "{{ vtsi_user }}" exists
   user:
     name: "{{ vtsi_user }}"
     shell: /bin/bash
-    groups: "{{ vtsi_user }},wheel"
+    groups: "{{ vtsi_group }},wheel"
     password: $6$baaEcM7F$gy7oQtnQkE4hWci2gD6uI0x.jtPDFMFqCFlEwZAdnEnnPxa19Wp1kN4g4XJ33siKto5SewQ.zGc.9zOiGrrym/
 
 - name: Populate service facts
