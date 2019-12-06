@@ -11,9 +11,9 @@
       - vtsi_group is defined 
       - vtsi_user is defined
       - vtsi_directory is defined
-      - build is defined
-      - mirror is defined
-      - tmp_dir is defined
+      - vtsi_build is defined
+      - vtsi_mirror is defined
+      - vtsi_tmp_dir is defined
       
 - name: Set hostname in /etc/hostname
   copy:
@@ -56,16 +56,16 @@
     path: /seachange/local/vtsi/bin/h2.mv.db
     state: absent
 
-- name: Unarchive {{ build }} vtsi
+- name: Unarchive {{ vtsi_build }} vtsi
   unarchive:
-    src: "{{ mirror }}"
-    dest: "{{ tmp_dir }}"
+    src: "{{ vtsi_mirror }}"
+    dest: "{{ vtsi_tmp_dir }}"
     remote_src: yes
-    creates: "{{ tmp_dir }}/vtsi-kit/"
+    creates: "{{ vtsi_tmp_dir }}/vtsi-kit/"
 
 - name: Find rpm files to install
   find:
-    paths: "{{ tmp_dir }}/vtsi-kit/rpms/"
+    paths: "{{ vtsi_tmp_dir }}/vtsi-kit/rpms/"
     patterns: 'jdk*.rpm,seachange*.rpm,vtsi*.rpm'
   register: rpms
 
