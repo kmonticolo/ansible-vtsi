@@ -69,6 +69,7 @@
     backup: yes
   notify:
     - restart vtsi
+    - reload systemd
 
 - name: Copy log4j file
   copy:
@@ -77,10 +78,7 @@
     remote_src: yes
   notify:
     - restart vtsi
-
-- name: Run daemon-reload before invoking handlers
-  command: systemctl daemon-reload
-  changed_when: no
+    - reload systemd
 
 - name: Flush handlers
   meta: flush_handlers
