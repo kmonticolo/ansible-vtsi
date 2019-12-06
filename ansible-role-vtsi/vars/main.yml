@@ -3,10 +3,10 @@
 
 # mirror with packages
 
-mirror: http://172.31.67.7/artifacts/vtsi/master/{{ build }}/vtsi-kit.tar.gz
+vtsi_mirror: http://172.31.67.7/artifacts/vtsi/master/{{ build }}/vtsi-kit.tar.gz
 
 # which build to use
-build: latest
+vtsi_build: latest
 
 # on which user vTSI service should run
 vtsi_user: seachange
