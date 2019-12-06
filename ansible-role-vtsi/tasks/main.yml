@@ -4,6 +4,17 @@
   include_vars:
     file: hosts.yml
 
+- name: Test variables
+  assert:
+    that:
+      - vtsi_hostname is defined
+      - vtsi_group is defined 
+      - vtsi_user is defined
+      - vtsi_directory is defined
+      - build is defined
+      - mirror is defined
+      - tmp_dir is defined
+      
 - name: Set hostname in /etc/hostname
   copy:
     content: "{{ vtsi_hostname }}"
