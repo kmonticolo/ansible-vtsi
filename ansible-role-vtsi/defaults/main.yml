@@ -3,7 +3,7 @@
 # default vtsi directory
 vtsi_directory: /seachange/local/vtsi
 # temporary directory
-tmp_dir: /tmp
+vtsi_tmp_dir: /tmp
 database_mdb_port: 1433
 database_sdb_port: 1433
 database_mdb_db_name: mpeg
