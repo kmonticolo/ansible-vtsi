@@ -15,8 +15,10 @@ install:
 # Ansible correctly installed?
 - ansible --version
 - ansible-galaxy install -r requirements.yml
-- sh: sudo ansible-playbook vtsi.yml --syntax-check -i inventories/local
+
 #- sh: sudo ansible-playbook vtsi.yml -i inventories/local -e "mirror=https://wspoma.ga/vtsi-kit.tar.gz"
+test:
+- sudo ansible-playbook vtsi.yml --syntax-check -i inventories/local
 
 build: off
 
