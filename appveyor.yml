@@ -11,15 +11,14 @@ environment:
 
 install:
 - sudo apt-get -yq install python-pip
-- sudo pip install ansible
+- sudo pip install ansible ansible-lint
 # Ansible correctly installed?
 - ansible --version
 - ansible-galaxy install -r requirements.yml
 - sudo ansible-playbook vtsi.yml --syntax-check -i inventories/local
+- ansible-lint vtsi.yml
 
 #- sh: sudo ansible-playbook vtsi.yml -i inventories/local -e "mirror=https://wspoma.ga/vtsi-kit.tar.gz"
-
-
 
 build: off
 
