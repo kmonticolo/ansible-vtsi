@@ -14,7 +14,7 @@
       - vtsi_build is defined
       - vtsi_mirror is defined
       - vtsi_tmp_dir is defined
-      
+
 - name: Set hostname in /etc/hostname
   copy:
     content: "{{ vtsi_hostname }}"
