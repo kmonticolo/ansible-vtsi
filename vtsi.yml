@@ -1,13 +1,9 @@
 ---
 - hosts: cim, pump, vtsi
+  become: yes
   roles:
     - { role: geerlingguy.ntp, ntp_timezone: 'Europe/Warsaw' }
-
-- hosts: all
-  become: yes
-  gather_facts: false
-  roles:
-  - { role: ansible-role-hosts, tags: hosts }
+    - { role: ansible-role-hosts, tags: hosts }
 
 - hosts: pump
   become: yes
