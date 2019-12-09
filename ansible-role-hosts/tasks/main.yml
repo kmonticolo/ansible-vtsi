@@ -8,9 +8,12 @@
     msg: "{{ hostvars[inventory_hostname].ansible_default_ipv4.address }}"
 
 - name: Add instances to host group
-  local_action: add_host hostname={{ hostvars[item].ansible_default_ipv4.address }} groupname=ip_group
+  add_host:
+    hostname: "{{ hostvars[item].ansible_default_ipv4.address }}"
+    groupname: ip_group
   with_items: "{{ play_hosts }}"
   run_once: True
+  delegate_to: localhost
 
 - name: Set IP facts
   set_fact:
