@@ -8,7 +8,7 @@
   assert:
     that:
       - vtsi_hostname is defined
-      - vtsi_group is defined 
+      - vtsi_group is defined
       - vtsi_user is defined
       - vtsi_directory is defined
       - vtsi_build is defined
