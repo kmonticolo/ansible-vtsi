@@ -10,8 +10,8 @@ environment:
 #- sh: curl -sflL 'https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-ssh.sh' | bash -e -
 
 install:
-- sudo apt-get -yq install python-pip
-- sudo pip install ansible ansible-lint
+- sudo apt-get -yq install python3-pip
+- sudo pip3 install ansible ansible-lint
 # Ansible correctly installed?
 - ansible --version
 - ansible-galaxy install -r requirements.yml
