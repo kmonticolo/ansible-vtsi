@@ -2,7 +2,7 @@ galaxy_info:
   author: Kamil Monticolo
   description: A role to install vtsi
   company: sc
-  license: GPLv3
+  license: BSD
   min_ansible_version: 2.5
   platforms:
   - name: Centos
