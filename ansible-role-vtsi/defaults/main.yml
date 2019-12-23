@@ -5,9 +5,9 @@ vtsi_directory: /seachange/local/vtsi
 # temporary directory
 vtsi_tmp_dir: /tmp
 database_mdb_port: 1433
-database_sdb_port: 1433
+database_sdb_port: "{{ database_mdb_port }}"
 database_mdb_db_name: mpeg
-database_sdb_db_name: mpeg
+database_sdb_db_name: "{{ database_mdb_db_name }}"
 alarm_share: C_DRIVE
 alarm_path: cdci/alarms/DATA/ALARMS.DAT
 alarm_domain: NIGHTSPOT
