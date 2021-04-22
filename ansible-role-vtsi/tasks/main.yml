@@ -12,7 +12,7 @@
       - vtsi_user is defined
       - vtsi_directory is defined
       - vtsi_build is defined
-      - vtsi_mirror is defined
+      - vtsi_mirror is definedFaw
       - vtsi_tmp_dir is defined
 
 - name: Set hostname in /etc/hostname
@@ -53,7 +53,7 @@
 
 - name: Remove H2 DB to avoid conflicts on environments
   file:
-    path: /seachange/local/vtsi/bin/h2.mv.db
+    path: "{{ vtsi_directory }}/bin/h2.mv.db"
     state: absent
 
 - name: Unarchive {{ vtsi_build }} vtsi
